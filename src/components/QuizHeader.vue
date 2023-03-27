@@ -1,16 +1,17 @@
 <script setup>
 import { defineProps } from "vue";
 
-const { questionStatus, barPerctange } = defineProps([
+const { questionStatus, barPercentage } = defineProps([
   "questionStatus",
-  "barPerctange",
+  "barPercentage",
 ]);
 </script>
+
 <template>
   <header>
     <h4>Question {{ questionStatus }}</h4>
     <div class="bar">
-      <div class="completion" :style="{ width: barPerctange }"></div>
+      <div class="completion" :style="{ width: barPercentage }"></div>
     </div>
   </header>
 </template>

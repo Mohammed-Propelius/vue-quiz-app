@@ -1,31 +1,31 @@
 <script setup>
-import { defineProps } from "vue";
-import { defineEmits } from "vue";
-const { question } = defineProps(["question"]);
-const emit = defineEmits(["selectedOption"]);
+import { defineProps, defineEmits } from "vue";
 
-const emitData = (selected) => {
-  emit("selectedOption", selected);
+const emit = defineEmits(["selectOption"]);
+
+const { question } = defineProps(["question"]);
+
+const emitSelectedOption = (isCorrect) => {
+  emit("selectOption", isCorrect);
 };
 </script>
+
 <template>
-  <div>
-    <div>
-      <div class="question-container">
-        <h1 class="question">{{ question.text }}</h1>
-      </div>
-      <div class="options-container">
-        <div
-          class="option"
-          v-for="options in question.options"
-          :key="options.id"
-          @click="emitData(options.isCorrect)"
-        >
-          <p class="option-label">{{ options.label }}</p>
-          <div class="option-value">
-            <p>{{ options.text }}</p>
-          </div>
-        </div>
+  <div class="question-container">
+    <h1 class="question">
+      {{ question.text }}
+    </h1>
+  </div>
+  <div class="options-container">
+    <div
+      v-for="option in question.options"
+      :key="option.id"
+      class="option"
+      @click="emitSelectedOption(option.isCorrect)"
+    >
+      <p class="option-label">{{ option.label }}</p>
+      <div class="option-value">
+        <p>{{ option.text }}</p>
       </div>
     </div>
   </div>
@@ -49,7 +49,6 @@ const emitData = (selected) => {
 
 .option-label {
   background-color: bisque;
-  color: black;
   width: 50px;
   height: 50px;
   font-size: 30px;
